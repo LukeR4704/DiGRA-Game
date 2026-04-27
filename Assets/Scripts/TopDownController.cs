@@ -23,6 +23,17 @@ public class TopDownController : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        Vector2 movement = controls.Player.Move.ReadValue<Vector2>();
+
+        if (movement != Vector2.zero)
+        {
+            float angle = Mathf.Atan2(movement.y, movement.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(0, 0, angle - 90f);
+        }
+    }
+
     void OnEnable()
     {
         controls.Enable();
