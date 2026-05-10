@@ -12,10 +12,14 @@ public class WorldCollider : MonoBehaviour
         boxCollider = GetComponent<BoxCollider2D>();
     }
 
+    private void Start()
+    {
+        UpdateCollider();
+    }
+
     private void OnEnable()
     {
         WorldStateManager.OnWorldChanged += UpdateCollider;
-        UpdateCollider();
     }
 
     private void OnDisable()
