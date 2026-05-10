@@ -2,43 +2,99 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
-public class RainAnimator : MonoBehaviour
+[RequireComponent(typeof(AudioSource))]
+public class PurpleRain : MonoBehaviour
 {
-    [Header("Sprites")]
+    [Header("Animation")]
     public Sprite[] frames;
-    public float frameRate = 12f; // frames per second
+    public float frameRate = 12f;
 
     private Image image;
+    private AudioSource audioSource;
+
     private Coroutine animCoroutine;
     private bool isPlaying = false;
 
-    void Awake()
+    private void Awake()
     {
         image = GetComponent<Image>();
-        gameObject.SetActive(false);
+        audioSource = GetComponent<AudioSource>();
+
+        // Start hidden
+        image.enabled = false;
     }
 
-    public void Toggle()
+    private void Start()
+    {
+        UpdateRainState();
+    }
+
+    private void OnEnable()
+    {
+        WorldStateManager.OnWorldChanged += UpdateRainState;
+    }
+
+    private void OnDisable()
+    {
+        WorldStateManager.OnWorldChanged -= UpdateRainState;
+    }
+
+    private void UpdateRainState()
+    {
+        if (WorldStateManager.Instance == null)
+            return;
+
+        bool isPurple = WorldStateManager.Instance.isPurpleWorld;
+
+        if (isPurple)
+        {
+            PlayRain();
+        }
+        else
+        {
+            StopRain();
+        }
+    }
+
+    private void PlayRain()
     {
         if (isPlaying)
-            Stop();
-        else
-            Play();
-    }
+            return;
 
-    private void Play()
-    {
         isPlaying = true;
-        gameObject.SetActive(true);
+
+        // Show rain image
+        image.enabled = true;
+
+        // Start animation
         animCoroutine = StartCoroutine(Animate());
+
+        // Start sound
+        if (!audioSource.isPlaying)
+        {
+            audioSource.Play();
+        }
     }
 
-    private void Stop()
+    private void StopRain()
     {
+        if (!isPlaying)
+            return;
+
         isPlaying = false;
+
+        // Hide rain image
+        image.enabled = false;
+
+        // Stop animation
         if (animCoroutine != null)
+        {
             StopCoroutine(animCoroutine);
-        gameObject.SetActive(false);
+            animCoroutine = null;
+        }
+
+        // Stop sound
+        audioSource.Stop();
     }
 
     private IEnumerator Animate()
@@ -49,7 +105,9 @@ public class RainAnimator : MonoBehaviour
         while (true)
         {
             image.sprite = frames[currentFrame];
+
             currentFrame = (currentFrame + 1) % frames.Length;
+
             yield return new WaitForSeconds(delay);
         }
     }

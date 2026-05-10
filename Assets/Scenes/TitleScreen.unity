@@ -743,7 +743,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0006db7e2cfc9c049ad5c8caf104991a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StartAndQuit
-  gameScene: TestScene
+  gameScene: GameScene
 --- !u!1 &998878203
 GameObject:
   m_ObjectHideFlags: 0

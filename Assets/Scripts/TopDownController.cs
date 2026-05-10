@@ -13,8 +13,8 @@ public class TopDownController : MonoBehaviour
     public bool hasKey = false;
     public Key carryKey;
 
-    [Header("Rain UI Animation")]
-    public RainAnimator rainAnimator;
+    // [Header("Rain UI Animation")]
+    // public RainAnimator rainAnimator;
 
     private Rigidbody2D rb;
     private Vector2 movement;
@@ -97,8 +97,8 @@ public class TopDownController : MonoBehaviour
 
         WorldStateManager.Instance.ToggleWorld();
 
-        if (rainAnimator != null)
-            rainAnimator.Toggle();
+        // if (rainAnimator != null)
+        //     rainAnimator.Toggle();
     }
 
     void FixedUpdate()

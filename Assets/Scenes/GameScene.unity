@@ -436,6 +436,7 @@ GameObject:
   - component: {fileID: 17678930}
   - component: {fileID: 17678933}
   - component: {fileID: 17678932}
+  - component: {fileID: 17678934}
   - component: {fileID: 17678931}
   m_Layer: 0
   m_Name: Square (71)
@@ -517,7 +518,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e28ce80e56fe2d6478dd08c972e80e1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ColourChanger
-  greenColor: {r: 0, g: 0.8, b: 0, a: 1}
+  greenColor: {r: 0, g: 0.8, b: 0, a: 0}
   purpleColor: {r: 0.59607846, g: 0.2, b: 0.8235294, a: 1}
 --- !u!212 &17678933
 SpriteRenderer:
@@ -569,7 +570,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0, g: 0.8, b: 0, a: 1}
+  m_Color: {r: 0.16470589, g: 0.23137257, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -578,6 +579,19 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &17678934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 17678929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eca5cd43b97c312449c7901e423073d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WorldStateManager
+  isPurpleWorld: 1
 --- !u!1 &19093782
 GameObject:
   m_ObjectHideFlags: 0
@@ -11178,8 +11192,8 @@ Transform:
   m_GameObject: {fileID: 793540506}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 336, y: 384, z: 0}
-  m_LocalScale: {x: 20, y: 156.7707, z: 40}
+  m_LocalPosition: {x: 336, y: 350.09, z: 0}
+  m_LocalScale: {x: 20, y: 89.3593, z: 40}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1266270912}
@@ -13471,6 +13485,7 @@ GameObject:
   - component: {fileID: 918375043}
   - component: {fileID: 918375042}
   - component: {fileID: 918375041}
+  - component: {fileID: 918375045}
   - component: {fileID: 918375044}
   m_Layer: 5
   m_Name: Rain
@@ -13580,6 +13595,103 @@ MonoBehaviour:
   - {fileID: 843193496104720826, guid: 0fe7f574555376b48bcd3ee57d75926d, type: 3}
   - {fileID: -7038936014636895266, guid: 0fe7f574555376b48bcd3ee57d75926d, type: 3}
   frameRate: 14
+--- !u!82 &918375045
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 918375039}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: bcd1a1692ff206b4084b66ed213423a5, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.2
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &944047682
 GameObject:
   m_ObjectHideFlags: 0
@@ -14374,9 +14486,9 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 300995022}
+  - {fileID: 918375040}
   - {fileID: 134086696}
   - {fileID: 1847228945}
-  - {fileID: 918375040}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -18378,7 +18490,6 @@ Transform:
   - {fileID: 1886760881}
   - {fileID: 417401060}
   - {fileID: 1303483726}
-  - {fileID: 17678930}
   - {fileID: 804843656}
   - {fileID: 1062033674}
   - {fileID: 793540507}
@@ -18467,6 +18578,7 @@ Transform:
   - {fileID: 328277927}
   - {fileID: 1234861228}
   - {fileID: 331963791}
+  - {fileID: 1389830972}
   - {fileID: 810900273}
   - {fileID: 373916438}
   - {fileID: 173673063}
@@ -18499,7 +18611,6 @@ Transform:
   - {fileID: 1234491853}
   - {fileID: 956569253}
   - {fileID: 1393585080}
-  - {fileID: 1389830972}
   - {fileID: 1235695857}
   - {fileID: 1085626729}
   - {fileID: 98604243}
@@ -18514,6 +18625,7 @@ Transform:
   - {fileID: 1632818109}
   - {fileID: 1755944590}
   - {fileID: 414897827}
+  - {fileID: 17678930}
   - {fileID: 2017275159}
   - {fileID: 2112553608}
   - {fileID: 1000753823}
@@ -20631,7 +20743,6 @@ GameObject:
   - component: {fileID: 1389830972}
   - component: {fileID: 1389830975}
   - component: {fileID: 1389830974}
-  - component: {fileID: 1389830976}
   - component: {fileID: 1389830973}
   m_Layer: 0
   m_Name: Square (139)
@@ -20713,7 +20824,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e28ce80e56fe2d6478dd08c972e80e1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ColourChanger
-  greenColor: {r: 0, g: 0.8, b: 0, a: 0}
+  greenColor: {r: 0, g: 0.8, b: 0, a: 1}
   purpleColor: {r: 0.59607846, g: 0.2, b: 0.8235294, a: 1}
 --- !u!212 &1389830975
 SpriteRenderer:
@@ -20765,7 +20876,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.16509432, g: 0.22725704, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.8000001, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -20774,19 +20885,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &1389830976
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1389830971}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 890fffb06c4291d48ae16b475411009a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WorldCollider
-  enabledInPurpleWorld: 1
 --- !u!1 &1393585079
 GameObject:
   m_ObjectHideFlags: 0
@@ -27077,7 +27175,6 @@ MonoBehaviour:
   lastMoveDirection: {x: 0, y: -1}
   hasKey: 0
   carryKey: {fileID: 0}
-  rainAnimator: {fileID: 918375044}
   shiftSound: {fileID: 8300000, guid: 55961596001719d478697002807ce1b2, type: 3}
 --- !u!61 &1944412745
 BoxCollider2D:
