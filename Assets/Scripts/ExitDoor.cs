@@ -6,13 +6,8 @@ public class ExitDoor : MonoBehaviour
    // public string nextSceneName;
 
     private bool opened = false;
-    public AudioClip unlockSound;
-    private AudioSource audioSource;
-
-    private void Awake()
-    {
-        audioSource = GetComponent<AudioSource>();
-    }
+    public GameObject closedDoor;
+    public GameObject openDoor;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -28,16 +23,13 @@ public class ExitDoor : MonoBehaviour
                 opened = true;
                 Debug.Log("Door unlocked!");
 
-                if (unlockSound != null)
-                {
-                    audioSource.PlayOneShot(unlockSound);
-                }
-
                 if (inventory.carryKey != null)
                 {
                     inventory.carryKey.ConsumeKey();
-                    Destroy(gameObject, unlockSound.length);
                 }
+
+                closedDoor.SetActive(false);
+                openDoor.SetActive(true);
 
                 inventory.hasKey = false;
 
