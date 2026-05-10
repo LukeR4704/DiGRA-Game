@@ -1,15 +1,16 @@
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
-[RequireComponent(typeof(BoxCollider2D))]
+[RequireComponent(typeof(TilemapCollider2D))]
 public class WorldCollider : MonoBehaviour
 {
     public bool enabledInPurpleWorld = false;
 
-    private BoxCollider2D boxCollider;
+    private TilemapCollider2D tileCollider;
 
     private void Awake()
     {
-        boxCollider = GetComponent<BoxCollider2D>();
+        tileCollider = GetComponent<TilemapCollider2D>();
     }
 
     private void Start()
@@ -32,6 +33,6 @@ public class WorldCollider : MonoBehaviour
         bool isPurple = WorldStateManager.Instance.isPurpleWorld;
 
         // Enable collider depending on your setting
-        boxCollider.enabled = (isPurple == enabledInPurpleWorld);
+        tileCollider.enabled = (isPurple == enabledInPurpleWorld);
     }
 }
