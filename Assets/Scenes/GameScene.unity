@@ -195,7 +195,7 @@ MonoBehaviour:
   m_text: "\uF02D\uF012S\uF015\t= \uF01Bove\n    E \t= \uF014hange \uF02Dorld"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bd3ca216de2377e47b38592ae3193982, type: 2}
-  m_sharedMaterial: {fileID: 909381009838916759, guid: bd3ca216de2377e47b38592ae3193982, type: 2}
+  m_sharedMaterial: {fileID: 0}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -40965,9 +40965,9 @@ RectTransform:
   - {fileID: 300995022}
   - {fileID: 918375040}
   - {fileID: 134086696}
-  - {fileID: 1847228945}
   - {fileID: 4851089}
   - {fileID: 806249493}
+  - {fileID: 1847228945}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
