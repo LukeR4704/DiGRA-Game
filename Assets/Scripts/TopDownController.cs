@@ -8,39 +8,41 @@ public class TopDownController : MonoBehaviour
     [Header("Movement")]
     public float moveSpeed = 5f;
     public Vector2 lastMoveDirection = Vector2.down;
+    public Joystick joystick;
 
     [Header("Key")]
     public bool hasKey = false;
     public Key carryKey;
 
-    // [Header("Rain UI Animation")]
-    // public RainAnimator rainAnimator;
+    [Header("Audio")]
+    public AudioClip shiftSound;
 
     private Rigidbody2D rb;
     private Vector2 movement;
     private Animator animator;
+    private AudioSource audioSource;
 
     private PlayerControls controls;
+
     private float toggleCooldown = 1f;
     private float lastToggleTime = -Mathf.Infinity;
-
-    [Header("Audio")]
-    public AudioClip shiftSound;
-    private AudioSource audioSource;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        controls = new PlayerControls();
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
+
+        controls = new PlayerControls();
     }
 
     void OnEnable()
     {
         controls.Enable();
+
         controls.Player.Move.performed += OnMove;
         controls.Player.Move.canceled += OnMove;
+
         controls.Player.Interact.performed += OnToggleWorld;
     }
 
@@ -48,41 +50,81 @@ public class TopDownController : MonoBehaviour
     {
         controls.Player.Move.performed -= OnMove;
         controls.Player.Move.canceled -= OnMove;
+
         controls.Player.Interact.performed -= OnToggleWorld;
+
         controls.Disable();
+    }
+
+    void Update()
+    {
+        // Mobile joystick input
+        if (joystick != null)
+        {
+            Vector2 joystickInput = new Vector2(
+                joystick.Horizontal,
+                joystick.Vertical
+            );
+
+            ProcessInput(joystickInput);
+        }
     }
 
     private void OnMove(InputAction.CallbackContext context)
     {
-        Vector2 input = context.ReadValue<Vector2>();
+        Vector2 keyboardInput = context.ReadValue<Vector2>();
 
+        ProcessInput(keyboardInput);
+    }
+
+    private void ProcessInput(Vector2 input)
+    {
+        // Prevent tiny joystick drift
+        if (input.magnitude < 0.1f)
+        {
+            movement = Vector2.zero;
+            animator.SetBool("isMoving", false);
+            return;
+        }
+
+        // Restrict to 4 directions
         if (Mathf.Abs(input.x) > Mathf.Abs(input.y))
         {
-            movement = input.x > 0 ? new Vector2(1, 0) : new Vector2(-1, 0);
+            movement = input.x > 0
+                ? new Vector2(1, 0)
+                : new Vector2(-1, 0);
+
             animator.SetInteger("direction", input.x > 0 ? 3 : 2);
-        }
-        else if (Mathf.Abs(input.y) > 0)
-        {
-            movement = input.y > 0 ? new Vector2(0, 1) : new Vector2(0, -1);
-            animator.SetInteger("direction", input.y > 0 ? 0 : 1);
         }
         else
         {
-            movement = Vector2.zero;
+            movement = input.y > 0
+                ? new Vector2(0, 1)
+                : new Vector2(0, -1);
+
+            animator.SetInteger("direction", input.y > 0 ? 0 : 1);
         }
 
-        if (movement != Vector2.zero)
-            lastMoveDirection = movement;
+        lastMoveDirection = movement;
 
-        animator.SetBool("isMoving", movement != Vector2.zero);
+        animator.SetBool("isMoving", true);
     }
 
     private void OnToggleWorld(InputAction.CallbackContext context)
     {
-        if (!context.performed) return;
-        if (Time.time < lastToggleTime + toggleCooldown) return;
+        if (!context.performed)
+            return;
+
+        MobileShiftWorld();
+    }
+
+    public void MobileShiftWorld()
+    {
+        if (Time.time < lastToggleTime + toggleCooldown)
+            return;
 
         lastToggleTime = Time.time;
+
         StartCoroutine(ShiftWorld());
     }
 
@@ -91,14 +133,13 @@ public class TopDownController : MonoBehaviour
         animator.SetTrigger("onShift");
 
         if (shiftSound != null)
+        {
             audioSource.PlayOneShot(shiftSound);
+        }
 
         yield return new WaitForSeconds(0.5f);
 
         WorldStateManager.Instance.ToggleWorld();
-
-        // if (rainAnimator != null)
-        //     rainAnimator.Toggle();
     }
 
     void FixedUpdate()
